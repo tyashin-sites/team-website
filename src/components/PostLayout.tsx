@@ -44,7 +44,7 @@ export function PostLayout({ slug, children }: { slug: string; children: ReactNo
           <Link href="/insights" className="font-mono text-xs uppercase tracking-[0.14em] text-primary no-underline">
             Insights
           </Link>
-          <h1 className="mt-4 text-4xl font-semibold leading-tight text-ink sm:text-5xl">{post.title}</h1>
+          <h1 className="mt-4 text-4xl font-light leading-tight text-ink sm:text-5xl">{post.title}</h1>
           <p className="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-muted">
             {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · {post.readMinutes} min read
           </p>

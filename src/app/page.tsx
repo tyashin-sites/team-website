@@ -31,7 +31,7 @@ export default function HomePage() {
         <Container className="grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.15fr_1fr]">
           <div>
             <Eyebrow>Aapastech group</Eyebrow>
-            <h1 className="rise mt-4 text-5xl font-semibold leading-[1.04] text-ink sm:text-7xl">We build the software we run.</h1>
+            <h1 className="rise mt-4 text-5xl font-light leading-[1.04] text-ink sm:text-7xl">We build the software we run.</h1>
             <p className="rise rise-2 mt-6 max-w-xl text-lg leading-relaxed text-muted">
               Aapastech is the group behind Tyashin, Thridify, YOM and WonderlyAR. We run these products in production every day, and the same team builds software and advises businesses in India, Europe and North America.
             </p>
@@ -78,7 +78,7 @@ export default function HomePage() {
       <section className="border-y border-border bg-ink text-white">
         <Container className="grid gap-12 py-20 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#7fd1c4]">Services</p>
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-highlight">Services</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl">Need it built, or need a second opinion?</h2>
             <p className="mt-4 text-lg text-white/75">The engineers and operators behind our products also work with clients, from first MVP to systems that run in three regions.</p>
           </div>

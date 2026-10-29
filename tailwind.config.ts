@@ -14,6 +14,8 @@ export default {
         foreground: 'var(--brand-text)',
         muted: 'var(--brand-text-muted)',
         border: 'var(--brand-border)',
+        logo: 'var(--brand-logo)',
+        highlight: 'var(--brand-highlight)',
       },
       borderRadius: {
         sm: 'var(--brand-radius-sm)',

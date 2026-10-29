@@ -25,7 +25,7 @@ export function LegalShell({
       <JsonLd data={buildGraph({ name: title, path, description, crumbs: [{ name: title, path }] })} />
       <Container className="py-16">
         <article className="prose-legal mx-auto max-w-3xl">
-          <h1 className="text-4xl font-semibold text-ink sm:text-5xl">{title}</h1>
+          <h1 className="text-4xl font-light text-ink sm:text-5xl">{title}</h1>
           <p className="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-muted">Last updated {updated}</p>
           {regionNote ? (
             <div className="mt-6 flex flex-col gap-3 rounded-lg border border-border bg-surface p-4 text-sm sm:flex-row sm:items-center sm:justify-between">

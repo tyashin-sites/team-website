@@ -1,18 +1,24 @@
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
 
-/* Thesis: an engineering group that explains itself plainly. Paper pages, ink type,
-   one teal signal, hairline rules like a technical drawing. */
+/* Thesis: an engineering group that explains itself plainly. White pages, the
+   <Aapastech/> blue as the one signal, blue-grey type, hairline rules like code.
+   Colours from the Aapastech brand kit: primary #007DFF, secondary #455A64,
+   gradient #0585F6 to #1FDEFF. #007DFF is kept for the logo and large accents;
+   text and buttons use #0070E6, the nearest shade that passes 4.5:1 on white. */
 html:root {
-  --brand-primary: #0f5c55;
+  --brand-primary: #0070e6;
   --brand-primary-contrast: #ffffff;
-  --brand-accent: #b4410f;
-  --brand-ink: #0d1624;
-  --brand-bg: #f6f5f1;
-  --brand-surface: #ffffff;
-  --brand-text: #131b28;
-  --brand-text-muted: #4a5565;
-  --brand-border: #d9d6cc;
+  --brand-accent: #455a64;
+  --brand-ink: #263238;
+  --brand-bg: #ffffff;
+  --brand-surface: #f2f8ff;
+  --brand-text: #263238;
+  --brand-text-muted: #455a64;
+  --brand-border: #dce8f5;
+  --brand-logo: #007dff;
+  --brand-highlight: #1fdeff;
+  --brand-gradient: linear-gradient(90deg, #0585f6, #1fdeff);
   --brand-radius-sm: 4px;
   --brand-radius-md: 8px;
   --brand-radius-lg: 14px;
@@ -53,8 +59,8 @@ a { text-underline-offset: 3px; }
 /* Hairline drawing grid behind the hero. */
 .drawing-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, #0d1624 7%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, #0d1624 7%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, #007dff 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, #007dff 8%, transparent) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
