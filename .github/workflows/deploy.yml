@@ -1,0 +1,130 @@
+name: Deploy to Cloudflare Workers (isolated build)
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Fetch build-time env (OIDC, this repository only)
+        run: |
+          OIDC=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=tyashin-build" | node -e "process.stdout.write(JSON.parse(require('fs').readFileSync(0,'utf8')).value)")
+          curl -sS "https://website-api.tyashin.com/api/v1/builds/oidc-env" -H "Authorization: Bearer $OIDC" | node -e "
+            const data = JSON.parse(require('fs').readFileSync(0,'utf8'));
+            if (!data.success || !data.data) { console.error('No build-time env:', JSON.stringify(data)); process.exit(0); }
+            const fs = require('fs');
+            for (const [key, val] of Object.entries(data.data)) {
+              const v = String(val ?? '');
+              console.log('::add-mask::' + v);
+              fs.appendFileSync(process.env.GITHUB_ENV, key + '<<__TYASHIN_EOF__\\n' + v + '\\n__TYASHIN_EOF__\\n');
+              console.log('  Exposed to build env: ' + key);
+            }
+          "
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build with OpenNext
+        run: npx @opennextjs/cloudflare build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: open-next
+          path: .open-next
+          include-hidden-files: true
+          retention-days: 1
+          if-no-files-found: error
+
+  deploy:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout platform config only
+        if: needs.build.result == 'success'
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            wrangler.jsonc
+          sparse-checkout-cone-mode: false
+
+      - name: Download build output
+        if: needs.build.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: open-next
+          path: .open-next
+
+      - name: Setup Node.js
+        if: needs.build.result == 'success'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Deploy to Workers
+        id: deploy
+        if: needs.build.result == 'success'
+        working-directory: ${{ github.workspace }}
+        run: npx --yes wrangler@4 deploy --config wrangler.jsonc
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Set Worker secrets
+        if: steps.deploy.outcome == 'success'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          SECRETS_JSON=$(curl -sS "${{ secrets.TYASHIN_API_URL }}/api/v1/builds/secrets/${{ github.repository }}" \
+            -H "X-Build-Secret: ${{ secrets.TYASHIN_BUILD_SECRET }}")
+          echo "$SECRETS_JSON" | node -e "
+            const data = JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));
+            if (data.success && data.data) {
+              for (const [key, val] of Object.entries(data.data)) {
+                const { execSync } = require('child_process');
+                execSync('npx --yes wrangler@4 secret put ' + key + ' --config wrangler.jsonc', { input: String(val), stdio: ['pipe', 'pipe', 'pipe'] });
+                console.log('Set secret: ' + key);
+              }
+            }
+          "
+
+      - name: Notify Tyashin (success)
+        if: steps.deploy.outcome == 'success'
+        run: |
+          curl -sS -X POST "${{ secrets.TYASHIN_API_URL }}/api/v1/builds/webhook" \
+            -H "Content-Type: application/json" \
+            -H "X-Build-Secret: ${{ secrets.TYASHIN_BUILD_SECRET }}" \
+            -d '{"repo":"${{ github.repository }}","commit_sha":"${{ github.sha }}","status":"success","run_id":"${{ github.run_id }}"}'
+
+      - name: Notify Tyashin (failure)
+        if: needs.build.result != 'success' || steps.deploy.outcome != 'success'
+        run: |
+          curl -sS -X POST "${{ secrets.TYASHIN_API_URL }}/api/v1/builds/webhook" \
+            -H "Content-Type: application/json" \
+            -H "X-Build-Secret: ${{ secrets.TYASHIN_BUILD_SECRET }}" \
+            -d '{"repo":"${{ github.repository }}","commit_sha":"${{ github.sha }}","status":"failed","run_id":"${{ github.run_id }}","error":"Build failed — see https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'

@@ -1,0 +1,20 @@
+{
+  "name": "site-team-website",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "kv_namespaces": [
+    { "binding": "NEXT_INC_CACHE_KV", "id": "6c196e0cf21c4686be618066a88ba6c6" }
+  ],
+  "services": [
+    { "binding": "WORKER_SELF_REFERENCE", "service": "site-team-website" }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "NEXT_CACHE_DO_QUEUE", "class_name": "DOQueueHandler" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["DOQueueHandler"] }]
+}

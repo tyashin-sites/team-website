@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+/* Thesis: an engineering group that explains itself plainly. Paper pages, ink type,
+   one teal signal, hairline rules like a technical drawing. */
+html:root {
+  --brand-primary: #0f5c55;
+  --brand-primary-contrast: #ffffff;
+  --brand-accent: #b4410f;
+  --brand-ink: #0d1624;
+  --brand-bg: #f6f5f1;
+  --brand-surface: #ffffff;
+  --brand-text: #131b28;
+  --brand-text-muted: #4a5565;
+  --brand-border: #d9d6cc;
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 14px;
+  --brand-radius-full: 9999px;
+  --brand-heading-font: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --brand-body-font: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --header-h: 64px;
+}
+
+html {
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+body {
+  background: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: var(--brand-body-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--brand-heading-font);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+a { text-underline-offset: 3px; }
+
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hairline drawing grid behind the hero. */
+.drawing-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, #0d1624 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, #0d1624 7%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.prose-legal h2 { font-size: 1.35rem; font-weight: 650; margin: 2.25rem 0 0.75rem; }
+.prose-legal h3 { font-size: 1.05rem; font-weight: 650; margin: 1.5rem 0 0.5rem; }
+.prose-legal p, .prose-legal li { color: var(--brand-text); line-height: 1.7; margin: 0.6rem 0; }
+.prose-legal ul { list-style: disc; padding-left: 1.25rem; }
+.prose-legal a { color: var(--brand-primary); text-decoration: underline; }
+
+@keyframes rise {
+  from { transform: translateY(14px); }
+  to { transform: translateY(0); }
+}
+.rise { animation: rise 700ms cubic-bezier(0.2, 0.7, 0.1, 1) both; }
+.rise-2 { animation-delay: 90ms; }
+.rise-3 { animation-delay: 180ms; }
+
+@keyframes draw {
+  from { stroke-dashoffset: 400; }
+  to { stroke-dashoffset: 0; }
+}
+.draw { stroke-dasharray: 400; animation: draw 1.6s ease-out 0.2s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .draw { animation: none; }
+  html { scroll-behavior: auto; }
+}
