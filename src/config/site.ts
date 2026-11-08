@@ -37,10 +37,7 @@ export const ENTITIES: Record<RegionId, Entity> = {
     regionShort: 'India',
     name: 'Aapastech Private Limited',
     ids: ['CIN U72900DL2022PTC395508', 'GSTIN 06AAVCA6693D1ZK'],
-    address: [
-      'Registered office: 8/3, 2nd Floor, Roop Nagar, Delhi 110007, India',
-      'Principal place of business: 1st Floor, 145, Sector 44, Gurugram, Haryana 122003, India',
-    ],
+    address: ['Registered office: 8/3, 2nd Floor, Roop Nagar, Delhi 110007, India'],
     phone: PHONES.india,
     dataRole: 'the data fiduciary for your personal data under Indian law',
     law: 'Indian law',

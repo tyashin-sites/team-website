@@ -2,7 +2,7 @@
 
 | # | Item | Where it shows | Why |
 |---|---|---|---|
-| 1 | Official Aapastech logo (SVG) | Header, footer, favicon, OG image | No group logo exists in any repo. A typographic "A" mark is drawn in code for now. |
+| 1 | ~~Official Aapastech logo (SVG)~~ Done 2026-10-29 | Header, footer, favicon, OG image | Brand kit logotype and bracket mark now used. |
 | 2 | GenzPreneur: audience, format, dates, fees, instructor | /learning, home | Only the name was given (owner, 2026-10-28). |
 | 3 | Services detail: past client work, case studies, rates | /services/* | Owner named the services; no case studies or client names were supplied. |
 | 4 | Confirm DMCA designated agent registration (US Copyright Office) | /trust, /copyright | Shown as "in progress" on the owner's word (2026-10-28). No filing found on record. Update to "Done" with the registration number once filed. |
