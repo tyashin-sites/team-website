@@ -256,7 +256,7 @@ export const PRODUCTS: Product[] = [
     path: '/products/yom',
     brand: 'YOM',
     name: 'YOM, Your Own Metrics',
-    logo: { src: '/brands/yom.svg', w: 24, h: 24 },
+    logo: { src: '/brands/yom.svg', w: 512, h: 512 },
     url: 'https://yom.aapastech.com',
     urlLabel: 'yom.aapastech.com',
     category: 'First-party analytics',
