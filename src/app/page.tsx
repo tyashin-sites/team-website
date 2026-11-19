@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { PRODUCTS, SERVICES, THRIDIFY_CLIENTS, COURSES } from '@/config/site';
-import { POSTS } from '@/lib/posts';
+import { getHomePosts } from '@/lib/blog';
 import { pageMetadata } from '@/lib/seo';
 import { buildGraph } from '@/lib/knowledge-graph';
 import { ButtonLink, Container, CtaBand, Eyebrow, JsonLd, SectionTitle } from '@/components/ui';
@@ -23,7 +23,8 @@ const TRUST = [
   'AI chatbots that say they are AI, AI images labelled',
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { posts } = await getHomePosts(4);
   return (
     <>
       <JsonLd data={buildGraph()} />
@@ -134,11 +135,11 @@ export default function HomePage() {
           <div>
             <SectionTitle eyebrow="Insights" title="Notes from running a group across three regions" />
             <ul className="mt-8 divide-y divide-border border-y border-border">
-              {POSTS.map((p) => (
-                <li key={p.slug}>
+              {posts.map((p) => (
+                <li key={p.href}>
                   <Link href={p.href} className="group flex items-baseline justify-between gap-6 py-5">
                     <span className="text-lg font-medium text-ink group-hover:text-primary">{p.title}</span>
-                    <span className="shrink-0 font-mono text-xs text-muted">{p.readMinutes} min</span>
+                    {p.readMinutes ? <span className="shrink-0 font-mono text-xs text-muted">{p.readMinutes} min</span> : null}
                   </Link>
                 </li>
               ))}
