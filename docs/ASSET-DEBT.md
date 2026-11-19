@@ -6,7 +6,7 @@
 | 2 | GenzPreneur: audience, format, dates, fees, instructor | /learning, home | Only the name was given (owner, 2026-10-28). |
 | 3 | Services detail: past client work, case studies, rates | /services/* | Owner named the services; no case studies or client names were supplied. |
 | 4 | Confirm DMCA designated agent registration (US Copyright Office) | /trust, /copyright | Shown as "in progress" on the owner's word (2026-10-28). No filing found on record. Update to "Done" with the registration number once filed. |
-| 5 | Confirm Content Authenticity Initiative membership status | /trust, /insights/labelling-ai-images | Shown as "working toward membership". No application found on record. |
+| 5 | Confirm Content Authenticity Initiative membership status | /trust, /blog/labelling-ai-images | Shown as "working toward membership". No application found on record. |
 | 6 | UK Article 27 representative | /trust, /privacy | Not appointed yet (T-0563). Name it when appointed. |
 | 7 | Aapastech OÜ deletion notice (T-0538) | /about, footer, legal pages | OÜ is shown as the EU/UK company while its annual reports are unfiled. |
 | 8 | Partner CRM product name and its new web address | /products/partner-crm | Still branded Thridify Partners at partners.thridify.com. |

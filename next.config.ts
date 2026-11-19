@@ -17,6 +17,13 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_SITE_DOMAIN: process.env.NEXT_PUBLIC_SITE_DOMAIN || "team-website.sites.tyashin.com",
   },
+  // Insights moved to the Tyashin blog. Old addresses keep working with a 301.
+  async redirects() {
+    return [
+      { source: '/insights', destination: '/blog', statusCode: 301 as const },
+      { source: '/insights/:slug', destination: '/blog/:slug', statusCode: 301 as const },
+    ];
+  },
   async rewrites() {
     return [
       { source: '/brand-kit.css', destination: `${SLUG_HOST}/brand-kit.css` },

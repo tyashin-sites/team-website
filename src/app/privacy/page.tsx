@@ -17,7 +17,7 @@ export default async function PrivacyPage() {
       title="Privacy notice"
       path="/privacy"
       description={description}
-      updated="29 October 2026"
+      updated="19 November 2026"
       current={v.chosen ? v.region : undefined}
       regionNote={`You are reading this as a visitor from ${v.entity.regionLabel === 'Everywhere else' ? 'outside India, the EU and the UK' : v.entity.regionLabel}. Your controller is ${v.entity.name}.`}
     >
@@ -42,6 +42,10 @@ export default async function PrivacyPage() {
         </li>
       </ul>
       <p>We do not sell personal data, and we do not use this site&apos;s data for advertising.</p>
+      <h2 id="newsletter">Newsletter</h2>
+      <p>
+        If you subscribe to our newsletter, we store your email address, the date and page where you signed up, and the IP address and browser used, as a record of your consent. We then send one email with a confirmation link. You are only added to the list after you open that link, and until then we send nothing else. Every email we send has an unsubscribe link, and we stop writing as soon as you use it. The list is kept on Tyashin, our own website platform. The controller of this data is {v.entity.name}, the Aapastech company for your region shown above.
+      </p>
       <h2>How long we keep it</h2>
       <p>
         Enquiries are kept while we are talking to you and for up to two years after, unless you become a customer, in which case the product&apos;s policy applies. Security logs are kept for 180 days. Invoices and tax records, where they exist, are kept for 8 years.

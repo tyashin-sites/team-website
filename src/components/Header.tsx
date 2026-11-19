@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Container, Wordmark } from '@/components/ui';
 import { MobileNav } from '@/components/MobileNav';
 import { NAV } from '@/components/nav';
+import { NavAnchor } from '@/components/NavAnchor';
 
 export function Header() {
   return (
@@ -12,9 +13,9 @@ export function Header() {
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
           {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
+            <NavAnchor key={n.href} href={n.href} className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary">
               {n.label}
-            </Link>
+            </NavAnchor>
           ))}
         </nav>
         <div className="flex items-center gap-3">

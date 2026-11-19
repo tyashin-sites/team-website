@@ -3,6 +3,7 @@ import { Container, Wordmark } from '@/components/ui';
 import { RegionSwitcher } from '@/components/RegionSwitcher';
 import { CONTACT_EMAIL, ENTITIES, REGION_ORDER } from '@/config/site';
 import { SiteIndex } from '@/components/SiteIndex';
+import { SubscribeBlock } from '@/components/SubscribeBlock';
 
 export function Footer() {
   return (
@@ -20,6 +21,9 @@ export function Footer() {
           </a>
           <div className="mt-6">
             <RegionSwitcher />
+          </div>
+          <div className="mt-8 max-w-sm">
+            <SubscribeBlock source="footer" variant="compact" />
           </div>
         </div>
         <SiteIndex />

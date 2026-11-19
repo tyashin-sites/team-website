@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 /* Literal links to every page, so crawlers and the Tyashin link checker see them.
-   Keep in step with src/config/site.ts and src/lib/posts.ts. */
+   Keep in step with src/config/site.ts. /blog is served by the Tyashin platform, so it is a plain <a>. */
 const L = 'text-sm text-muted transition-colors hover:text-primary';
 const H = 'font-mono text-xs uppercase tracking-[0.16em] text-ink';
 
@@ -38,7 +38,7 @@ export function SiteIndex() {
           <ul className="mt-4 space-y-2">
           <li><Link href="/about" className={L}>About</Link></li>
           <li><Link href="/learning" className={L}>Learning</Link></li>
-          <li><Link href="/insights" className={L}>Insights</Link></li>
+          <li><a href="/blog" className={L}>Insights</a></li>
           <li><Link href="/trust" className={L}>Trust and compliance</Link></li>
           <li><Link href="/contact" className={L}>Contact</Link></li>
           </ul>
@@ -54,16 +54,5 @@ export function SiteIndex() {
         </div>
       </div>
     </>
-  );
-}
-
-export function PostIndex() {
-  return (
-    <ul className="mt-4 space-y-2">
-          <li><Link href="/insights/one-group-three-companies" className={L}>One group, three companies: who you sign with</Link></li>
-          <li><Link href="/insights/how-our-grievance-officer-works" className={L}>How our Grievance Officer handles a complaint</Link></li>
-          <li><Link href="/insights/labelling-ai-images" className={L}>How we label AI images across our products</Link></li>
-          <li><Link href="/insights/cert-in-point-of-contact" className={L}>What being registered with CERT-In means for our customers</Link></li>
-    </ul>
   );
 }

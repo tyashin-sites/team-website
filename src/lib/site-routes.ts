@@ -1,5 +1,4 @@
 import { PRODUCTS, SERVICES } from '@/config/site';
-import { POSTS } from '@/lib/posts';
 
 export function getSiteRoutes(): string[] {
   return [
@@ -11,8 +10,6 @@ export function getSiteRoutes(): string[] {
     '/learning',
     '/about',
     '/trust',
-    '/insights',
-    ...POSTS.map((p) => `/insights/${p.slug}`),
     '/contact',
     '/grievance',
     '/copyright',
