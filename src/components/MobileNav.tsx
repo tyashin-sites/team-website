@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NAV } from '@/components/nav';
+import { NavAnchor } from '@/components/NavAnchor';
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -24,9 +24,9 @@ export function MobileNav() {
           <ul className="flex flex-col">
             {[...NAV, { href: '/contact', label: 'Talk to us' }].map((n) => (
               <li key={n.href}>
-                <Link href={n.href} onClick={() => setOpen(false)} className="block border-b border-border py-3 text-lg font-medium text-ink">
+                <NavAnchor href={n.href} onClick={() => setOpen(false)} className="block border-b border-border py-3 text-lg font-medium text-ink">
                   {n.label}
-                </Link>
+                </NavAnchor>
               </li>
             ))}
           </ul>

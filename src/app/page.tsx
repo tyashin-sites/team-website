@@ -8,6 +8,8 @@ import { buildGraph } from '@/lib/knowledge-graph';
 import { ButtonLink, Container, CtaBand, Eyebrow, JsonLd, SectionTitle } from '@/components/ui';
 import { GroupMap } from '@/components/GroupMap';
 import { RegionNotice } from '@/components/RegionNotice';
+import { NavAnchor } from '@/components/NavAnchor';
+import { SubscribeBlock } from '@/components/SubscribeBlock';
 
 export const metadata = pageMetadata({
   title: 'Aapastech: software, 3D and AR, analytics and consulting',
@@ -137,14 +139,19 @@ export default async function HomePage() {
             <ul className="mt-8 divide-y divide-border border-y border-border">
               {posts.map((p) => (
                 <li key={p.href}>
-                  <Link href={p.href} className="group flex items-baseline justify-between gap-6 py-5">
+                  <NavAnchor href={p.href} className="group flex items-baseline justify-between gap-6 py-5">
                     <span className="text-lg font-medium text-ink group-hover:text-primary">{p.title}</span>
                     {p.readMinutes ? <span className="shrink-0 font-mono text-xs text-muted">{p.readMinutes} min</span> : null}
-                  </Link>
+                  </NavAnchor>
                 </li>
               ))}
             </ul>
+            <a href="/blog" className="mt-6 inline-block font-semibold text-primary underline">
+              All insights
+            </a>
           </div>
+          <div className="grid gap-6 self-start">
+          <SubscribeBlock source="home" />
           <div className="rounded-lg border border-border bg-surface p-8">
             <Eyebrow>Learning</Eyebrow>
             <h2 className="mt-3 text-2xl font-semibold text-ink">{COURSES[0]?.name}</h2>
@@ -152,6 +159,7 @@ export default async function HomePage() {
             <Link href="/learning" className="mt-6 inline-block font-semibold text-primary underline">
               About our courses
             </Link>
+          </div>
           </div>
         </Container>
       </section>
